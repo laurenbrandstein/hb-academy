@@ -35,20 +35,48 @@
 //    you have to re-allocate a whole new block
 
 class LinkedList {
-    head: LinkedListNode;
+    head: LinkedListNode = null;
+    size: number = 0;
 
-    public insert(value: number): void {
-        this.head = new LinkedListNode(value);
+    public insertAtHead(value: number): void {
+        this.head = new LinkedListNode(value, this.head);
+        this.size += 1;
     };
 
-    // public insertAtIndex(value: number, index: number): void {
-    //     if (index) {
-    //         while ()
-    //     }
-    // }; 
+    public insertAtIndex(value: number, index: number): void {
+        if (index > this.size) {
+            throw new Error(`There is no item at ${index}. Sorry bruh.`);
+        }
+
+        if (index === 0) {
+            this.insertAtHead(value);
+        } else {
+            let previousNode = this.head;
+
+            for (let i = 0; i < (index - 1); i++) {
+                previousNode = previousNode.nextNode;
+            }
+
+            previousNode.nextNode = new LinkedListNode(value, previousNode.nextNode);
+
+            this.size += 1;
+        }
+    };
 }
 
 class LinkedListNode {
     value: number;
-    nextNode: LinkedListNode | null;
+    nextNode: LinkedListNode = null;
+
+    constructor(value, nextNode) {
+        this.value = value;
+        this.nextNode = nextNode;
+    }
 }
+
+let ll = new LinkedList();
+ll.insertAtHead(42);
+ll.insertAtHead(36);
+ll.insertAtHead(18);
+ll.insertAtIndex(100, 2);
+console.log(ll);
