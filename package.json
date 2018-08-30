@@ -1,0 +1,29 @@
+{
+  "name": "hb-academy",
+  "version": "1.0.0",
+  "description": "HB Academy Lessons",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "ntypescript": "^1.201706190042.1"
+  },
+  "scripts": {
+    "build": "ntsc -p ./src --outDir ./dist",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurenbrandstein/hb-academy.git"
+  },
+  "keywords": [
+    "HB",
+    "Academy",
+    "Typescript",
+    "CS"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurenbrandstein/hb-academy/issues"
+  },
+  "homepage": "https://github.com/laurenbrandstein/hb-academy#readme"
+}
