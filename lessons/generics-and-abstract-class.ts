@@ -1,4 +1,4 @@
-class LinkedList<T extends Shape> {
+class LinkedList<T> {
     head: LinkedListNode<T> = null;
     size: number = 0;
 
