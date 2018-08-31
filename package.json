@@ -8,7 +8,7 @@
     "ntypescript": "^1.201706190042.1"
   },
   "scripts": {
-    "build": "ntsc -p ./src --outDir ./dist",
+    "build": "ntsc -p ./lessons --outDir ./dist"
   },
   "repository": {
     "type": "git",
