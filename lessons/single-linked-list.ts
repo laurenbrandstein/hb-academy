@@ -1,9 +1,9 @@
 class SingleLinkedList {
-    head: LinkedListNode1 = null;
+    head: SingleLinkedListNode = null;
     size: number = 0;
 
     public insertAtHead(value: number): void {
-        this.head = new LinkedListNode1(value, this.head);
+        this.head = new SingleLinkedListNode(value, this.head);
         this.size += 1;
     };
 
@@ -21,16 +21,16 @@ class SingleLinkedList {
                 previousNode = previousNode.nextNode;
             }
 
-            previousNode.nextNode = new LinkedListNode1(value, previousNode.nextNode);
+            previousNode.nextNode = new SingleLinkedListNode(value, previousNode.nextNode);
 
             this.size += 1;
         }
     };
 }
 
-class LinkedListNode1 {
+class SingleLinkedListNode {
     value: number;
-    nextNode: LinkedListNode1 = null;
+    nextNode: SingleLinkedListNode = null;
 
     constructor(value, nextNode) {
         this.value = value;
