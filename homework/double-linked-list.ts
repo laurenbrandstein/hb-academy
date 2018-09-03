@@ -1,7 +1,14 @@
 // Homework
 // Implement a doubly linked list
-// insert
-// insertAtTail()
-// remove(x: number) // you guys choose how this should work
 // reversePrint()
 // Make it generic
+export default class DoublyLinkedList<T>{
+
+	public insert(value: T): void {}
+
+	public insertAtTail(value: T): void {}
+
+	public remove(index: number): T {}
+
+	public reversePrint(): void {}
+}
