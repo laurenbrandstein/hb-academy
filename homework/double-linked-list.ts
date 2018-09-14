@@ -2,6 +2,7 @@
 // Implement a doubly linked list
 // reversePrint()
 // Make it generic
+
 class DoublyLinkedList<T>{
 	head: DoublyLinkedListNode = null;
 	size: number = 0;
@@ -68,14 +69,14 @@ class DoublyLinkedList<T>{
 			nodeToRemove = this.head;
 			this.head = nodeToRemove.nextNode;
 
-			nodeToRemove.nextNode = null;
+			nodeToRemove.nextNode = null; // necessary?
 			this.head.previousNode = null;
 		} else if (index === (this.size - 1)) {
 			// remove tail
 			nodeToRemove = this.tail;
 			this.tail = nodeToRemove.previousNode;
 
-			nodeToRemove.previousNode = null;
+			nodeToRemove.previousNode = null; // necessary?
 			this.tail.nextNode = null;
 		} else {
 			// remove a middle node
@@ -87,8 +88,8 @@ class DoublyLinkedList<T>{
 
 			nodeToRemove.previousNode.nextNode = nodeToRemove.nextNode;
 			nodeToRemove.nextNode.previousNode = nodeToRemove.previousNode;
-			nodeToRemove.previousNode = null;
-			nodeToRemove.nextNode = null;
+			nodeToRemove.previousNode = null; // necessary?
+			nodeToRemove.nextNode = null; // necessary?
         }
 
 		this.size -= 1;
@@ -98,6 +99,20 @@ class DoublyLinkedList<T>{
 
 	public reverse(): void {
 		console.log('Permanently reverse the list.');
+
+		let oldHead = this.head;
+		let node = this.head;
+
+		for (let i = 0; i < this.size; i++) {
+			let nextNodeToProcess = node.nextNode;
+
+			node.nextNode = node.previousNode;
+			node.previousNode = nextNodeToProcess;
+			node = nextNodeToProcess;
+		}
+
+		this.head = this.tail;
+		this.tail = oldHead;
 	}
 
 	public reverseAndPrint(): void {
@@ -124,5 +139,5 @@ doublyLinkedList.insertAtHead('potato');
 doublyLinkedList.insertAtTail('yam');
 doublyLinkedList.insertAtTail(42);
 doublyLinkedList.remove(3);
-debugger;
+doublyLinkedList.reverseAndPrint();
 doublyLinkedList.reverseAndPrint();
