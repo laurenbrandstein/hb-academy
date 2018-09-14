@@ -14,18 +14,22 @@ class DoublyLinkedList<T>{
 
 	public insert(value: T): void {
 		this.head = new DoublyLinkedListNode<T>(null, this.head, value);
-		if(this.head.next) { //point old head back to new head
+		//Point old head back to new head
+		if(this.directionForward && this.head.next) {
 			this.head.next.previous = this.head;
+		}
+		if(!this.directionForward && this.head.previous) {
+			this.head.previous.next = this.head;
 		}
 	}
 
 	public insertAtTail(value: T): void {
-		let currNode = this.head;
-		while(currNode && currNode.next) {
-			currNode = currNode.next;
+		let currNode = this.getLastNode();
+		if(this.directionForward) {
+			currNode.next = new DoublyLinkedListNode<T>(currNode, null, value);
+		} else {
+			currNode.previous = new DoublyLinkedListNode<T>(currNode, null, value);
 		}
-
-		currNode.next = new DoublyLinkedListNode<T>(currNode, null, value);
 	}
 
 	private getLastNode(): DoublyLinkedListNode<T>{
@@ -36,7 +40,6 @@ class DoublyLinkedList<T>{
 				currNode = currNode.next;
 			}
 		} else {
-			let currNode = this.head;
 			while(currNode && currNode.previous) {
 				currNode = currNode.previous;
 			}
@@ -48,11 +51,18 @@ class DoublyLinkedList<T>{
 	public remove(index: number): T { //first node is at index
 		let currNode = this.head;
 		//either bring us to the tail node or the index
-		while(currNode && currNode.next && index > 0) {
-			currNode = currNode.next;
-			index--;
+		if(this.directionForward) {
+			while(currNode && currNode.next && index > 0) {
+				currNode = currNode.next;
+				index--;
+			}
+		} else {
+			while(currNode && currNode.previous && index > 0) {
+				currNode = currNode.previous;
+				index--;
+			}
 		}
-
+		//Connect separated nodes
 		if(currNode) {
 			if(currNode.previous) {
 				currNode.previous.next = currNode.next;
@@ -80,15 +90,11 @@ class DoublyLinkedList<T>{
 	}
 
 	public reversePrint(): void {
-		let currNode = this.head;
-		//either bring us to the tail node or the index
-		while(currNode && currNode.next) {
-			currNode = currNode.next;
-		}
+		let currNode = this.getLastNode();
 		//Print backwards
 		while(currNode) {
 			console.log(currNode.value);
-			currNode = currNode.previous;
+			currNode = this.directionForward ? currNode.previous : currNode.next;
 		}
 	}
 }
